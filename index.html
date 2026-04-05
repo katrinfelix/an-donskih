@@ -17,17 +17,36 @@
     color: #1a1a1a;
     line-height: 1.6;
     font-size: 11pt;
+    background: #e8e8e8;
   }
 
   .page {
     width: 210mm;
     min-height: 297mm;
     padding: 25mm 22mm;
-    page-break-after: always;
     position: relative;
+    margin: 32px auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
   }
 
-  .page:last-child { page-break-after: avoid; }
+  @media (max-width: 800px) {
+    .page {
+      width: 100%;
+      min-height: auto;
+      padding: 40px 24px;
+      margin: 16px auto;
+    }
+  }
+
+  @media print {
+    body { background: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: avoid; }
+  }
 
   /* COVER PAGE */
   .cover {
