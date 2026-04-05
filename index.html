@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.6;
+    font-size: 11pt;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 25mm 22mm;
+    page-break-after: always;
+    position: relative;
+  }
+
+  .page:last-child { page-break-after: avoid; }
+
+  /* COVER PAGE */
+  .cover {
+    background: linear-gradient(160deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40mm 30mm;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    padding: 6px 20px;
+    font-size: 9pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 30px;
+  }
+
+  .cover h1 {
+    font-size: 36pt;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .cover-accent {
+    color: #c9a96e;
+  }
+
+  .cover-sub {
+    font-size: 13pt;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    max-width: 380px;
+    margin: 0 auto 50px;
+    line-height: 1.5;
+  }
+
+  .cover-line {
+    width: 60px;
+    height: 2px;
+    background: #c9a96e;
+    margin: 0 auto 50px;
+  }
+
+  .cover-contact {
+    font-size: 9pt;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+
+  .cover-contact a {
+    color: #c9a96e;
+    text-decoration: none;
+  }
+
+  /* CONTENT PAGES */
+  .content-page {
+    background: #fff;
+  }
+
+  .page-header {
+    border-bottom: 2px solid #0f0f0f;
+    padding-bottom: 8px;
+    margin-bottom: 25px;
+  }
+
+  .page-header h2 {
+    font-size: 18pt;
+    font-weight: 700;
+    color: #0f0f0f;
+  }
+
+  .page-header .num {
+    font-size: 10pt;
+    color: #c9a96e;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    color: #0f0f0f;
+    margin: 18px 0 8px;
+  }
+
+  p { margin-bottom: 10px; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  .stat-card {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 16px;
+    border-left: 3px solid #c9a96e;
+  }
+
+  .stat-card .number {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #0f0f0f;
+    line-height: 1;
+  }
+
+  .stat-card .label {
+    font-size: 9pt;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .principle {
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border-left: 3px solid #c9a96e;
+  }
+
+  .principle strong {
+    display: block;
+    font-size: 10.5pt;
+    margin-bottom: 4px;
+  }
+
+  .principle p {
+    font-size: 9.5pt;
+    color: #444;
+    margin: 0;
+  }
+
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+  }
+
+  .steps li {
+    counter-increment: step;
+    padding: 10px 0 10px 50px;
+    position: relative;
+    border-bottom: 1px solid #eee;
+  }
+
+  .steps li:last-child { border-bottom: none; }
+
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    background: #0f0f0f;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12pt;
+    line-height: 32px;
+    text-align: center;
+  }
+
+  .steps li strong {
+    display: block;
+    font-size: 10.5pt;
+  }
+
+  .steps li span {
+    font-size: 9.5pt;
+    color: #555;
+  }
+
+  .case {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .case-title {
+    font-weight: 700;
+    font-size: 10.5pt;
+    color: #c9a96e;
+    margin-bottom: 4px;
+  }
+
+  .case p {
+    font-size: 9.5pt;
+    color: #444;
+    margin: 0;
+  }
+
+  blockquote {
+    border-left: 3px solid #c9a96e;
+    padding: 10px 16px;
+    margin: 10px 0;
+    background: #fafafa;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    font-size: 10pt;
+    color: #333;
+  }
+
+  .cta-box {
+    background: linear-gradient(160deg, #0f0f0f, #1a1a2e);
+    color: white;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .cta-box h3 {
+    color: white;
+    font-size: 16pt;
+    margin-bottom: 10px;
+  }
+
+  .cta-box p {
+    color: rgba(255,255,255,0.7);
+    font-size: 10pt;
+  }
+
+  .cta-box .contact {
+    display: inline-block;
+    background: #c9a96e;
+    color: #0f0f0f;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 11pt;
+    margin-top: 14px;
+    text-decoration: none;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 15mm;
+    left: 22mm;
+    right: 22mm;
+    text-align: center;
+    font-size: 8pt;
+    color: #bbb;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+  }
+
+  .tagline {
+    text-align: center;
+    font-size: 9pt;
+    color: #999;
+    font-style: italic;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover">
+  <div class="cover-badge">Агентство недвижимости</div>
+  <h1>Со мной <span class="cover-accent">безопасно.</span></h1>
+  <p class="cover-sub">Как мы помогаем обрести дом, а не просто продать квадратные метры</p>
+  <div class="cover-line"></div>
+  <p class="cover-contact">
+    Донских Недвижимость | Нижний Новгород<br>
+    Telegram: <a href="https://t.me/XSENIA_DONSKIH">@XSENIA_DONSKIH</a>
+  </p>
+</div>
+
+<!-- PAGE 2: WHY US -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="num">01 / Почему мы</span>
+    <h2>Почему Донских</h2>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="number">7 лет</div>
+      <div class="label">в недвижимости. Ковид, санкции, скачки ставок. Опыт не купишь</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">5-7</div>
+      <div class="label">сделок каждый месяц. Не разовые истории, а стабильный результат</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">77%</div>
+      <div class="label">клиентов приходят по рекомендации. Нас советуют друзьям</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">300+</div>
+      <div class="label">клиентов за время работы. Все типы недвижимости</div>
+    </div>
+  </div>
+
+  <h3>Что мы умеем</h3>
+  <p>Вторичка, первичка, инвестиционные объекты, флипы, дома, земельные участки, коммерция. Не нужно искать разных специалистов.</p>
+
+  <h3>Принципиальная позиция</h3>
+  <p><strong>Мы не берём двойные комиссии.</strong> Работаем в интересах той стороны, которая обратилась первой. Не сидим на двух стульях. Никогда.</p>
+
+  <h3>Сложные случаи — наш профиль</h3>
+  <p>Консульские доверенности из США и ЕС, сделки с недружественными странами, маткапитал, военные сертификаты, органы опеки, арестованная и обременённая недвижимость. То, от чего отказываются другие, для нас — рабочая задача.</p>
+
+  <div class="footer">Донских Недвижимость | donskih.pro</div>
+</div>
+
+<!-- PAGE 3: HOW WE WORK -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="num">02 / Процесс</span>
+    <h2>Как мы работаем</h2>
+  </div>
+
+  <ol class="steps">
+    <li>
+      <strong>Знакомство и запрос</strong>
+      <span>Созваниваемся или встречаемся. Разбираемся в вашей ситуации: что хотите, зачем, в какие сроки. Без давления, без спешки — в вашем темпе.</span>
+    </li>
+    <li>
+      <strong>Анализ и стратегия</strong>
+      <span>Продаёте — оцениваем объект, анализируем рынок, определяем реальную стоимость. Покупаете — подбираем варианты, проверяем документы, фильтруем мусор.</span>
+    </li>
+    <li>
+      <strong>Подготовка и запуск</strong>
+      <span>Фотографии, объявления, юридическая подготовка — всё берём на себя. Вы живёте своей жизнью.</span>
+    </li>
+    <li>
+      <strong>Работа с покупателями / продавцами</strong>
+      <span>Показы, переговоры, торг. Фильтруем нецелевые звонки, защищаем вашу цену. Вы занимаетесь своей жизнью — мы занимаемся сделкой.</span>
+    </li>
+    <li>
+      <strong>Сделка и юридическое сопровождение</strong>
+      <span>Проверка документов, согласование условий, подписание. Контролируем каждый этап, чтобы вы были защищены.</span>
+    </li>
+    <li>
+      <strong>Ключи — и дальше</strong>
+      <span>Передача ключей, приёмка. И после сделки мы остаёмся на связи — не исчезаем.</span>
+    </li>
+  </ol>
+
+  <div class="footer">Донских Недвижимость | donskih.pro</div>
+</div>
+
+<!-- PAGE 4: APPROACH -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="num">03 / Подход</span>
+    <h2>Наш подход</h2>
+  </div>
+
+  <div class="principle">
+    <strong>Безопасность — на первом месте</strong>
+    <p>Мы отказались от нелегальной сделки с тройной комиссией, когда обнаружили подделку документов. Ваша безопасность важнее наших денег.</p>
+  </div>
+
+  <div class="principle">
+    <strong>Работаем не только с бумажками, но и с головой</strong>
+    <p>Иногда квартира не продаётся не из-за цены — а потому что собственник внутренне не готов отпустить. Мы это видим и помогаем разобраться.</p>
+  </div>
+
+  <div class="principle">
+    <strong>Защищаем ваши интересы до последней копейки</strong>
+    <p>На одной передаче ключей мы вступили в конфликт из-за 3 000 рублей. Потому что это ваши деньги — и неважно, три тысячи или три миллиона.</p>
+  </div>
+
+  <div class="principle">
+    <strong>Говорим на вашем языке</strong>
+    <p>Мы не строим из себя самых умных. Переводим сложное на понятное. С кем-то нужно в пиджаке, с кем-то — по-простому.</p>
+  </div>
+
+  <div class="principle">
+    <strong>Работаем за кулисами</strong>
+    <p>Бывает, сделка на грани срыва — а вы об этом не знаете. Мы решаем проблемы тихо, чтобы вы спали спокойно.</p>
+  </div>
+
+  <div class="footer">Донских Недвижимость | donskih.pro</div>
+</div>
+
+<!-- PAGE 5: CASES + QUOTES -->
+<div class="page content-page">
+  <div class="page-header">
+    <span class="num">04 / Результаты</span>
+    <h2>Кейсы</h2>
+  </div>
+
+  <div class="case">
+    <div class="case-title">Сделка за 48 часов</div>
+    <p>От первого звонка до подписанного договора — двое суток. Когда всё на месте и обе стороны готовы, мы не тянем.</p>
+  </div>
+
+  <div class="case">
+    <div class="case-title">Доверенность из США в разгар санкций</div>
+    <p>Ни один банк не брал сделку. Мы нашли банк с SWIFT-переводами, провели сделку за наличные, выписали третье лицо через суд. Продавец получил деньги в Америке.</p>
+  </div>
+
+  <div class="case">
+    <div class="case-title">Квартира, которая не отпускала хозяйку</div>
+    <p>Отремонтированная квартира по хорошей цене — но сделки раз за разом срывались. Мы поняли: собственница воспринимала квартиру как члена семьи. Поговорили. Квартира продалась сразу после.</p>
+  </div>
+
+  <div class="case">
+    <div class="case-title">Три сделки и холодильник за 25 000</div>
+    <p>Цепочка из трёх сделок чуть не развалилась из-за спора о холодильнике. Мы заплатили из своего кармана и спасли всю цепочку.</p>
+  </div>
+
+  <h3 style="margin-top: 24px;">Что говорят клиенты</h3>
+
+  <blockquote>Вы первый человек, в котором я видела, что вам не всё равно на нашу ситуацию.</blockquote>
+
+  <blockquote>Когда мы с вами общались, создавалось впечатление, что мы у вас одни.</blockquote>
+
+  <blockquote>Я спокойно спал, пока вы решали это.</blockquote>
+
+  <blockquote>Мне понравилось, как вы защищаете свои интересы. Я знала, что вы будете защищать также мои.</blockquote>
+
+  <div class="cta-box">
+    <h3>Следующий шаг</h3>
+    <p>Расскажите о вашей ситуации. Без обязательств, без давления.<br>Просто разберёмся, чем можем помочь.</p>
+    <a href="https://t.me/XSENIA_DONSKIH" class="contact">Написать в Telegram</a>
+  </div>
+
+  <div class="footer">Донских Недвижимость | donskih.pro</div>
+</div>
+
+</body>
+</html>
