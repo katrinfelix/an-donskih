@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>АН Донских — Бренд-дашборд</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --surface2: #1a1e28;
+    --surface3: #1f2430;
+    --border: #2a2f3d;
+    --text: #e8eaf0;
+    --text2: #9ca3b4;
+    --text3: #636b7e;
+    --accent: #c9a96e;
+    --accent2: #e8c97a;
+    --green: #34d399;
+    --green-bg: rgba(52,211,153,0.12);
+    --red: #f87171;
+    --red-bg: rgba(248,113,113,0.1);
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --orange: #fb923c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--bg);
+  }
+
+  .brand-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .brand-subtitle {
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .badge {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .badge-green {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid rgba(52,211,153,0.3);
+  }
+
+  .badge-accent {
+    background: rgba(201,169,110,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(201,169,110,0.3);
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .tab:hover { color: var(--text2); }
+
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tab .icon { margin-right: 6px; }
+
+  /* CONTENT */
+  .content {
+    padding: 28px 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title .icon { font-size: 24px; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  /* STATS GRID */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .stat-number {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* TWO COLUMNS */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .content { padding: 16px; }
+    .tabs { padding: 0 16px; }
+    .header { padding: 12px 16px; }
+  }
+
+  /* DO / DON'T */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .voice-col {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+  }
+
+  .voice-col-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .voice-col-title.green {
+    color: var(--green);
+    border-left: 3px solid var(--green);
+    padding-left: 10px;
+  }
+
+  .voice-col-title.red {
+    color: var(--red);
+    border-left: 3px solid var(--red);
+    padding-left: 10px;
+  }
+
+  .voice-item {
+    padding: 8px 0;
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .voice-item:last-child { border-bottom: none; }
+
+  .voice-item .check { color: var(--green); flex-shrink: 0; }
+  .voice-item .cross { color: var(--red); flex-shrink: 0; }
+
+  .voice-item.dont {
+    color: var(--text3);
+    text-decoration: line-through;
+    text-decoration-color: rgba(248,113,113,0.3);
+  }
+
+  /* QUOTES */
+  .quote-card {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    font-style: italic;
+    color: var(--text2);
+    font-size: 13.5px;
+  }
+
+  /* TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .data-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--surface2);
+    color: var(--text3);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    background: var(--surface3);
+    border-radius: 8px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    background: var(--surface3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+
+  .tag-accent {
+    background: rgba(201,169,110,0.1);
+    border-color: rgba(201,169,110,0.25);
+    color: var(--accent);
+  }
+
+  /* PRINCIPLE */
+  .principle-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .principle-card strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+
+  .principle-card p {
+    font-size: 13px;
+    color: var(--text2);
+    margin: 0;
+  }
+
+  /* SEGMENT */
+  .segment-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 14px;
+  }
+
+  .segment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .segment-num {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .segment-name {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .segment-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .segment-meta-item {
+    font-size: 12px;
+  }
+
+  .segment-meta-item .label {
+    color: var(--text3);
+    margin-bottom: 2px;
+  }
+
+  .segment-meta-item .value {
+    color: var(--text2);
+  }
+
+  /* CASE CARD */
+  .case-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+  }
+
+  .case-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .case-text {
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  /* CHANNEL TABLE */
+  .channel-priority {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .priority-high {
+    background: var(--green-bg);
+    color: var(--green);
+  }
+
+  .priority-mid {
+    background: rgba(251,146,60,0.12);
+    color: var(--orange);
+  }
+
+  .priority-low {
+    background: rgba(96,165,250,0.12);
+    color: var(--blue);
+  }
+
+  /* COMPETITOR */
+  .competitor-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+
+  .competitor-name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .competitor-detail {
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .competitor-weakness {
+    font-size: 12px;
+    color: var(--red);
+    max-width: 250px;
+    text-align: right;
+  }
+
+  /* ROADMAP */
+  .roadmap-phase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 14px;
+    position: relative;
+    border-left: 3px solid var(--accent);
+  }
+
+  .roadmap-phase .phase-label {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .roadmap-phase h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .roadmap-phase ul {
+    padding-left: 18px;
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  .roadmap-phase ul li { margin-bottom: 4px; }
+
+  .kpi-target {
+    display: inline-block;
+    background: var(--surface3);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 8px;
+  }
+
+  /* QA SECTION */
+  .qa-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .qa-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .qa-item .qa-score {
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .qa-item .qa-label {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 4px;
+  }
+
+  .qa-pass { color: var(--green); }
+  .qa-warn { color: var(--orange); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-icon">АД</div>
+    <div>
+      <div class="brand-title">АН Донских</div>
+      <div class="brand-subtitle">Бренд-дашборд</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-green">QA: 8/9 ОК</span>
+    <span class="badge badge-accent">ГОТОВО К ОТПРАВКЕ</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" data-tab="overview"><span class="icon">📊</span>Обзор</div>
+  <div class="tab" data-tab="audience"><span class="icon">👥</span>Аудитория</div>
+  <div class="tab" data-tab="offer"><span class="icon">📦</span>Пакеты и оффер</div>
+  <div class="tab" data-tab="voice"><span class="icon">🔴</span>Голос бренда</div>
+  <div class="tab" data-tab="positioning"><span class="icon">💜</span>Позиционирование</div>
+  <div class="tab" data-tab="market"><span class="icon">📈</span>Рынок</div>
+  <div class="tab" data-tab="dna"><span class="icon">🧬</span>ДНК бренда</div>
+  <div class="tab" data-tab="strategy"><span class="icon">☕</span>Стратегия</div>
+</div>
+
+<!-- ==================== TAB 1: OVERVIEW ==================== -->
+<div class="content">
+<div class="tab-content active" id="overview">
+  <h2 class="section-title"><span class="icon">📊</span> Обзор</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">7 лет</div>
+      <div class="stat-label">В недвижимости. Ковид, санкции, скачки ставок</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">300+</div>
+      <div class="stat-label">Клиентов за всю историю. Все типы недвижимости</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">77%</div>
+      <div class="stat-label">Клиентов по сарафану и повторным обращениям</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">5-7</div>
+      <div class="stat-label">Сделок в месяц стабильно</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">75.5%</div>
+      <div class="stat-label">Маржинальность бизнеса</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">48 ч</div>
+      <div class="stat-label">Рекорд — от звонка до подписанного договора</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Позиционирование</div>
+    <div class="card-text" style="font-size: 18px; color: var(--text); font-weight: 600;">
+      &laquo;Со мной безопасно.&raquo;
+    </div>
+    <div class="card-text" style="margin-top: 8px;">
+      Риэлтор, к которой можно прийти с чем угодно, что связано с недвижимостью. 7 лет, 300+ семей, 77% рекомендаций. Сделки от эконома до элиты &mdash; с юридической проверкой, психологической поддержкой и защитой интересов до последнего рубля.
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Финансы Q1 2026</div>
+      <table class="data-table">
+        <tr><td>Выручка</td><td style="text-align:right; font-weight:600;">2 046 379 &#8381;</td></tr>
+        <tr><td>Расходы</td><td style="text-align:right;">378 812 &#8381;</td></tr>
+        <tr><td>Прибыль</td><td style="text-align:right; font-weight:600; color: var(--green);">1 544 784 &#8381;</td></tr>
+        <tr><td>Средний чек</td><td style="text-align:right;">146 170 &#8381;</td></tr>
+        <tr><td>Сделок</td><td style="text-align:right;">14</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Команда</div>
+      <table class="data-table">
+        <tr><td>Ксения</td><td style="text-align:right;">Фаундер, ведущий агент</td></tr>
+        <tr><td>Кристина</td><td style="text-align:right;">Стажёр 3 мес, 1 сделка</td></tr>
+        <tr><td>Юля</td><td style="text-align:right;">Стажёр 1 мес, обучение</td></tr>
+      </table>
+      <div style="margin-top: 12px;">
+        <div style="font-size: 12px; color: var(--text3);">Потолок мощности: 6 сделок/мес</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">QA — Готовность модели</div>
+    <div class="qa-grid">
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Профиль бренда</div></div>
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Голос и тон</div></div>
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Аудитория</div></div>
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Карта продаж</div></div>
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Оффер</div></div>
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Исследование рынка</div></div>
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Конкуренты</div></div>
+      <div class="qa-item"><div class="qa-score qa-pass">ОК</div><div class="qa-label">Стратегия роста</div></div>
+      <div class="qa-item"><div class="qa-score qa-warn">В РАБОТЕ</div><div class="qa-label">Гайдлайн дизайна</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 2: AUDIENCE ==================== -->
+<div class="tab-content" id="audience">
+  <h2 class="section-title"><span class="icon">👥</span> Аудитория</h2>
+
+  <div class="segment-card">
+    <div class="segment-header">
+      <div class="segment-num">1</div>
+      <div class="segment-name">Молодые семьи с детьми до 7 лет</div>
+    </div>
+    <div class="card-text">Семья растёт, квартира &mdash; нет. Нужна безопасная сделка: продать по максимуму, купить больше, чтобы у ребёнка был свой угол.</div>
+    <div class="segment-meta">
+      <div class="segment-meta-item">
+        <div class="label">Возраст</div>
+        <div class="value">25-45 лет</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">Доход</div>
+        <div class="value">от 200-300К на семью</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">Боль</div>
+        <div class="value">Страх потерять деньги, бесконечный процесс, юридические риски</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">JTBD</div>
+        <div class="value">&laquo;Хочу продать по максимуму и купить больше, чтобы семья развивалась&raquo;</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-accent">ОСНОВНОЙ</span>
+      <span class="tag">Одновременная продажа/покупка</span>
+      <span class="tag">Маткапитал</span>
+      <span class="tag">Ипотека</span>
+    </div>
+  </div>
+
+  <div class="segment-card">
+    <div class="segment-header">
+      <div class="segment-num">2</div>
+      <div class="segment-name">Инвесторы в недвижимость</div>
+    </div>
+    <div class="card-text">Есть капитал, нужна экспертиза рынка. Ищут выгодные объекты &mdash; вторичка, флипы, новостройки. Боятся неликвидной покупки и юридических рисков.</div>
+    <div class="segment-meta">
+      <div class="segment-meta-item">
+        <div class="label">Возраст</div>
+        <div class="value">30+ лет</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">Почему Ксения</div>
+        <div class="value">Оценка за 3 минуты, видит обременения как скидку, аналитика Авито</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">Боль</div>
+        <div class="value">Не знают рынок, страх неликвида, непонимание юридических рисков</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">JTBD</div>
+        <div class="value">&laquo;Купить выгодно, перепродать или сдать с прибылью&raquo;</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag">Флипы</span>
+      <span class="tag">Новостройки</span>
+      <span class="tag">Коммерция</span>
+    </div>
+  </div>
+
+  <div class="segment-card">
+    <div class="segment-header">
+      <div class="segment-num">3</div>
+      <div class="segment-name">Люди в жизненном переломе</div>
+    </div>
+    <div class="card-text">Развод, свадьба, рождение ребёнка, потеря близкого, переезд. Эмоциональная перегрузка + необходимость принимать финансовые решения. Нужен человек, который возьмёт на себя всё.</div>
+    <div class="segment-meta">
+      <div class="segment-meta-item">
+        <div class="label">Возраст</div>
+        <div class="value">25-55 лет</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">Почему Ксения</div>
+        <div class="value">2 курса психологии + 4 года терапии. Работает с тревогой, не давит</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">Боль</div>
+        <div class="value">Эмоциональная перегрузка, страх ошибки в уязвимый момент</div>
+      </div>
+      <div class="segment-meta-item">
+        <div class="label">JTBD</div>
+        <div class="value">&laquo;Чтобы кто-то всё взял на себя, пока я прихожу в себя&raquo;</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag">Развод</span>
+      <span class="tag">Наследство</span>
+      <span class="tag">Опека</span>
+      <span class="tag">Переезд</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Источники лидов (текущие)</div>
+    <table class="data-table">
+      <tr><td>Сарафанное радио</td><td style="text-align:right; font-weight:600;">53%</td></tr>
+      <tr><td>Повторные клиенты</td><td style="text-align:right;">24%</td></tr>
+      <tr><td>Авито</td><td style="text-align:right;">12%</td></tr>
+      <tr><td>Соцсети</td><td style="text-align:right;">6%</td></tr>
+      <tr><td>Другое</td><td style="text-align:right;">5%</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== TAB 3: OFFER ==================== -->
+<div class="tab-content" id="offer">
+  <h2 class="section-title"><span class="icon">📦</span> Пакеты и оффер</h2>
+
+  <div class="card">
+    <div class="card-title">Главный оффер</div>
+    <div class="card-text" style="font-size: 16px; color: var(--text); font-weight: 500;">
+      Полное сопровождение сделки &mdash; от первого звонка до ключей и после. Комиссия от одной стороны. Безопасность, защита интересов, психологическая поддержка.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Трансформация клиента</div>
+    <div class="two-col" style="margin-top:12px;">
+      <div style="background: var(--red-bg); border-radius:10px; padding:16px;">
+        <div style="color: var(--red); font-weight:700; font-size:12px; margin-bottom:8px;">ДО (БОЛЬ)</div>
+        <ul style="font-size:13px; color:var(--text2); padding-left:16px;">
+          <li>Страх потерять деньги</li>
+          <li>Бесконечный процесс</li>
+          <li>Юридические риски</li>
+          <li>Плохой опыт с риэлтором</li>
+          <li>&laquo;Зачем платить агенту?&raquo;</li>
+        </ul>
+      </div>
+      <div style="background: var(--green-bg); border-radius:10px; padding:16px;">
+        <div style="color: var(--green); font-weight:700; font-size:12px; margin-bottom:8px;">ПОСЛЕ (РЕЗУЛЬТАТ)</div>
+        <ul style="font-size:13px; color:var(--text2); padding-left:16px;">
+          <li>Спокойно спал, пока Ксения решала</li>
+          <li>Два звонка: &laquo;взяли ключи&raquo; и &laquo;есть сделка&raquo;</li>
+          <li>Все документы проверены</li>
+          <li>Защитили каждый рубль</li>
+          <li>Остались на связи после сделки</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Типы сделок</div>
+    <div class="tags" style="margin-top:0;">
+      <span class="tag tag-accent">Вторичка</span>
+      <span class="tag tag-accent">Новостройки</span>
+      <span class="tag tag-accent">Инвестиции / флипы</span>
+      <span class="tag tag-accent">Дома и участки</span>
+      <span class="tag tag-accent">Коммерция</span>
+      <span class="tag tag-accent">Готовый бизнес</span>
+      <span class="tag">Маткапитал</span>
+      <span class="tag">Военные сертификаты</span>
+      <span class="tag">Опека</span>
+      <span class="tag">Аресты и обременения</span>
+      <span class="tag">Консульские доверенности (США/ЕС)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Верифицированные цифры (Document of Truth)</div>
+    <table class="data-table">
+      <tr><td>Опыт</td><td style="text-align:right;">7 лет (с 2019)</td></tr>
+      <tr><td>Клиентов</td><td style="text-align:right;">300+</td></tr>
+      <tr><td>Сделок/мес</td><td style="text-align:right;">5-7</td></tr>
+      <tr><td>Самая быстрая сделка</td><td style="text-align:right;">48 часов</td></tr>
+      <tr><td>Крупнейшая сделка</td><td style="text-align:right;">25-30 млн &#8381;</td></tr>
+      <tr><td>Психология</td><td style="text-align:right;">2 курса + 4 года терапии</td></tr>
+      <tr><td>Оценка объекта</td><td style="text-align:right;">3 минуты</td></tr>
+      <tr><td>Сарафан</td><td style="text-align:right;">77%</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Принципиальная позиция</div>
+    <div class="card-text"><strong style="color:var(--accent);">Не берём двойные комиссии.</strong> Работаем в интересах той стороны, которая обратилась первой. Не сидим на двух стульях. Никогда.</div>
+  </div>
+</div>
+
+<!-- ==================== TAB 4: VOICE ==================== -->
+<div class="tab-content" id="voice">
+  <h2 class="section-title"><span class="icon">🔴</span> Голос и стиль бренда</h2>
+
+  <div class="card">
+    <div class="card-title">Тон бренда</div>
+    <div class="card-text" style="font-size:15px; color:var(--text);">
+      Тёплый эксперт. Не корпоративный, не инфобизовый. Уверенность без агрессии. Партнёр, который понимает задачу и говорит по существу. Обращение на &laquo;вы&raquo;, прямое, без официоза.
+    </div>
+    <div style="display:flex; gap:24px; margin-top:16px;">
+      <div>
+        <div style="font-size:11px; color:var(--text3); margin-bottom:4px;">Формальность</div>
+        <div style="font-size:18px; font-weight:700;">3<span style="font-size:12px; color:var(--text3);">/10</span></div>
+      </div>
+      <div>
+        <div style="font-size:11px; color:var(--text3); margin-bottom:4px;">Эмоциональность</div>
+        <div style="font-size:18px; font-weight:700;">7<span style="font-size:12px; color:var(--text3);">/10</span></div>
+      </div>
+      <div>
+        <div style="font-size:11px; color:var(--text3); margin-bottom:4px;">Прямота</div>
+        <div style="font-size:18px; font-weight:700;">8<span style="font-size:12px; color:var(--text3);">/10</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice-grid">
+    <div class="voice-col">
+      <div class="voice-col-title green">Как говорим &#10003;</div>
+      <div class="voice-item"><span class="check">&#10003;</span> &laquo;Со мной безопасно. Это не лозунг &mdash; это 300 семей, которые вернулись&raquo;</div>
+      <div class="voice-item"><span class="check">&#10003;</span> &laquo;Я продам вашу квартиру быстро, дорого и легко &mdash; если не будете мешать&raquo;</div>
+      <div class="voice-item"><span class="check">&#10003;</span> &laquo;Я работаю не только с бумажками, но и с головой&raquo;</div>
+      <div class="voice-item"><span class="check">&#10003;</span> &laquo;С кем-то нужно в пиджаке, с кем-то &mdash; по-простому. Я говорю на языке клиента&raquo;</div>
+      <div class="voice-item"><span class="check">&#10003;</span> &laquo;Я думаю о своих клиентах больше, чем они сами о себе думают&raquo;</div>
+      <div class="voice-item"><span class="check">&#10003;</span> &laquo;Три гарантии: безопасность, защита цены, сопровождение после сделки&raquo;</div>
+    </div>
+    <div class="voice-col">
+      <div class="voice-col-title red">Как не говорим &#10007;</div>
+      <div class="voice-item dont"><span class="cross">&#10007;</span> &laquo;Мы рады предложить вам уникальное сотрудничество в сфере недвижимости&raquo;</div>
+      <div class="voice-item dont"><span class="cross">&#10007;</span> &laquo;Наши высококвалифицированные специалисты обеспечат полный спектр услуг&raquo;</div>
+      <div class="voice-item dont"><span class="cross">&#10007;</span> &laquo;Комплексный подход к решению ваших задач&raquo;</div>
+      <div class="voice-item dont"><span class="cross">&#10007;</span> &laquo;Инвестиционный брокер по недвижимости&raquo;</div>
+      <div class="voice-item dont"><span class="cross">&#10007;</span> &laquo;Важно отметить, что наши ракетки отличаются...&raquo;</div>
+      <div class="voice-item dont"><span class="cross">&#10007;</span> &laquo;Безусловно, для каждого клиента важно иметь свой подход&raquo;</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="card">
+      <div class="card-title">Фирменные метафоры</div>
+      <div class="tags" style="margin-top:0;">
+        <span class="tag tag-accent">Медиатор, не юрист</span>
+        <span class="tag tag-accent">Со мной безопасно</span>
+        <span class="tag tag-accent">Работаю с головой, не только с бумажками</span>
+        <span class="tag tag-accent">Говорю на языке клиента</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Табу-слова (никогда не используем)</div>
+    <div class="tags" style="margin-top:0;">
+      <span class="tag" style="border-color:var(--red); color:var(--red);">инвестиционный брокер</span>
+      <span class="tag" style="border-color:var(--red); color:var(--red);">полный спектр услуг</span>
+      <span class="tag" style="border-color:var(--red); color:var(--red);">премиальный сервис</span>
+      <span class="tag" style="border-color:var(--red); color:var(--red);">уникальное предложение</span>
+      <span class="tag" style="border-color:var(--red); color:var(--red);">корпоративный канцелярит</span>
+      <span class="tag" style="border-color:var(--red); color:var(--red);">нейро-паттерны AI</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 5: POSITIONING ==================== -->
+<div class="tab-content" id="positioning">
+  <h2 class="section-title"><span class="icon">💜</span> Позиционирование</h2>
+
+  <div class="card">
+    <div class="card-title">Формула позиционирования</div>
+    <div class="card-text" style="font-size:20px; color:var(--text); font-weight:700; text-align:center; padding: 20px 0;">
+      Тепло + Безопасность + Экспертиза в сложных сделках
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Анти-позиционирование: чем мы НЕ являемся</div>
+    <table class="data-table">
+      <thead>
+        <tr><th>Типичный риэлтор</th><th>Ксения Донских</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Выставил и ждёт</td><td style="color:var(--green);">Мониторинг, аналитика, воронка</td></tr>
+        <tr><td>Двойные комиссии</td><td style="color:var(--green);">Принципиальное &laquo;нет&raquo;</td></tr>
+        <tr><td>Продаёт квадратные метры</td><td style="color:var(--green);">Помогает обрести дом</td></tr>
+        <tr><td>Приводит неквалов</td><td style="color:var(--green);">Фильтрует звонки, отсеивает туристов</td></tr>
+        <tr><td>Давит скидками</td><td style="color:var(--green);">Защищает цену, даже если сложнее</td></tr>
+        <tr><td>Давит клиента</td><td style="color:var(--green);">Заботится о состоянии, не торопит</td></tr>
+        <tr><td>После подписания = пропал</td><td style="color:var(--green);">Остаётся на связи годами</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Стратегический инсайт</div>
+    <div class="card-text" style="background:var(--surface2); border-radius:10px; padding:18px; font-size:15px; color:var(--accent); font-weight:500;">
+      В Нижнем Новгороде НЕТ НИ ОДНОГО риэлтора с сильным личным брендом в диджитале. Ниша полностью пуста. Ксения &mdash; первый кандидат на занятие этой позиции.
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px; margin-bottom:14px; font-size:16px;">Что говорят клиенты</h3>
+  <div class="quote-card">&laquo;Вы первый человек, в котором я видела, что вам не всё равно на нашу ситуацию.&raquo;</div>
+  <div class="quote-card">&laquo;Когда мы с вами общались, создавалось впечатление, что мы у вас одни.&raquo;</div>
+  <div class="quote-card">&laquo;Мне понравилось, как вы защищаете свои интересы. Я знала, что вы будете защищать также мои.&raquo;</div>
+  <div class="quote-card">&laquo;Я спокойно спал, пока вы решали это.&raquo;</div>
+  <div class="quote-card">&laquo;Без вас мы бы просто махнули рукой на эти три тысячи.&raquo;</div>
+  <div class="quote-card">&laquo;Мы даже боялись с вами торговаться.&raquo;</div>
+</div>
+
+<!-- ==================== TAB 6: MARKET ==================== -->
+<div class="tab-content" id="market">
+  <h2 class="section-title"><span class="icon">📈</span> Рынок</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">21 800</div>
+      <div class="stat-label">Сделок/год в Нижнем Новгороде</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">172.6К</div>
+      <div class="stat-label">&#8381;/м&sup2; вторичка (+10.7% за 2025)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">193.6К</div>
+      <div class="stat-label">&#8381;/м&sup2; новостройки (+11.6%)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3.3 млрд</div>
+      <div class="stat-label">&#8381; — TAM рынка комиссий НН</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">TAM / SAM / SOM</div>
+    <table class="data-table">
+      <tr><td><strong>TAM</strong> (весь рынок)</td><td style="text-align:right;">2.6-3.3 млрд &#8381;/год</td></tr>
+      <tr><td><strong>SAM</strong> (комфорт + бизнес)</td><td style="text-align:right;">2.7-3.6 млрд &#8381;/год</td></tr>
+      <tr><td><strong>SOM</strong> (текущая доля)</td><td style="text-align:right;">0.3-0.4% (60-84 сделки/год)</td></tr>
+      <tr><td><strong>SOM</strong> (цель 2М/мес)</td><td style="text-align:right;">0.8% (180 сделок/год)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ТОП-5 конкурентов</div>
+    <div class="competitor-row">
+      <div><div class="competitor-name">Монолит</div><div class="competitor-detail">450+ агентов, с 1997, #1 ЦИАН</div></div>
+      <div class="competitor-weakness">Корпоративный тон, нет личного бренда</div>
+    </div>
+    <div class="competitor-row">
+      <div><div class="competitor-name">Этажи</div><div class="competitor-detail">100+ агентов, федеральная франшиза</div></div>
+      <div class="competitor-weakness">Шаблонный подход, высокая текучка</div>
+    </div>
+    <div class="competitor-row">
+      <div><div class="competitor-name">Владис</div><div class="competitor-detail">50+ агентов, юр.поддержка</div></div>
+      <div class="competitor-weakness">Формально, нет личности</div>
+    </div>
+    <div class="competitor-row">
+      <div><div class="competitor-name">Золотой Ключик</div><div class="competitor-detail">~50 агентов, тёплый тон</div></div>
+      <div class="competitor-weakness">Нет бренда основателя</div>
+    </div>
+    <div class="competitor-row">
+      <div><div class="competitor-name">Самолёт Плюс</div><div class="competitor-detail">30+, 6 офисов, IT-платформа</div></div>
+      <div class="competitor-weakness">Технологии вместо тепла</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Ипотечный контекст 2026</div>
+    <div class="card-text">Ставка: 20-25% &rarr; прогноз 14.5-15% к концу 2026. Льготные программы: 6-9%. Правило &laquo;одна семья &mdash; одна ипотека&raquo; с 01.02.2026. Прогноз: +35% объём кредитования &rarr; волна спроса, нужно быть готовыми.</div>
+  </div>
+</div>
+
+<!-- ==================== TAB 7: DNA ==================== -->
+<div class="tab-content" id="dna">
+  <h2 class="section-title"><span class="icon">🧬</span> ДНК бренда</h2>
+
+  <div class="card">
+    <div class="card-title">Миссия</div>
+    <div class="card-text" style="font-size:18px; color:var(--text); font-weight:600; text-align:center; padding:16px 0;">
+      &laquo;Помогаем людям обрести дом. Сначала помогаем &mdash; потом зарабатываем.&raquo;
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">5 принципов</div>
+    <div class="principle-card">
+      <strong>1. Безопасность клиента &mdash; выше заработка</strong>
+      <p>Отказалась от сделки с тройной комиссией, когда обнаружила подделку документов. Ваша безопасность важнее наших денег.</p>
+    </div>
+    <div class="principle-card">
+      <strong>2. Работаем с головой, не только с бумажками</strong>
+      <p>Иногда квартира не продаётся не из-за цены &mdash; а потому что собственник внутренне не готов. Мы это видим и помогаем разобраться.</p>
+    </div>
+    <div class="principle-card">
+      <strong>3. Защита интересов до последнего рубля</strong>
+      <p>Вступили в конфликт из-за 3 000 рублей на передаче ключей. Потому что это ваши деньги &mdash; и неважно, три тысячи или три миллиона.</p>
+    </div>
+    <div class="principle-card">
+      <strong>4. Говорим на языке клиента</strong>
+      <p>С кем-то нужно в пиджаке, с кем-то &mdash; по-простому. Переводим сложное на понятное.</p>
+    </div>
+    <div class="principle-card">
+      <strong>5. Работаем за кулисами</strong>
+      <p>Бывает, сделка на грани срыва &mdash; а клиент об этом не знает. Решаем проблемы тихо, чтобы вы спали спокойно.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px; margin-bottom:14px; font-size:16px;">Ключевые кейсы</h3>
+
+  <div class="case-card">
+    <div class="case-title">Сделка за 48 часов</div>
+    <div class="case-text">От звонка до подписанного договора &mdash; двое суток. Когда всё на месте и обе стороны готовы &mdash; не тянем.</div>
+  </div>
+  <div class="case-card">
+    <div class="case-title">Доверенность из США в разгар санкций</div>
+    <div class="case-text">Ни один банк не брал сделку. Нашли банк с SWIFT-переводами, провели сделку за наличные, выписали третье лицо через суд. Продавец получил деньги в Америке.</div>
+  </div>
+  <div class="case-card">
+    <div class="case-title">Квартира, которая не отпускала хозяйку</div>
+    <div class="case-text">Отремонтированная квартира &mdash; но сделки срывались годами. Собственница воспринимала квартиру как члена семьи. Поговорили. Продалась сразу.</div>
+  </div>
+  <div class="case-card">
+    <div class="case-title">Три сделки и холодильник за 25 000</div>
+    <div class="case-text">Цепочка из трёх сделок чуть не развалилась из-за спора о холодильнике. Заплатили из своего кармана и спасли всю цепочку.</div>
+  </div>
+  <div class="case-card">
+    <div class="case-title">Ребёнку было 7 &mdash; стал клиентом</div>
+    <div class="case-text">Помогли маме с дочкой купить квартиру. Мама умерла через 3 недели. Помогли бабушке продать и купить меньше для внучки. 15 лет &mdash; до сих пор в жизни семьи.</div>
+  </div>
+</div>
+
+<!-- ==================== TAB 8: STRATEGY ==================== -->
+<div class="tab-content" id="strategy">
+  <h2 class="section-title"><span class="icon">☕</span> Стратегия</h2>
+
+  <div class="card">
+    <div class="card-title">Цель</div>
+    <div class="card-text" style="font-size:16px; color:var(--text); font-weight:600;">
+      2 000 000 &#8381;/мес чистой прибыли к декабрю 2026
+    </div>
+    <div class="card-text" style="margin-top:6px;">
+      Текущая: ~500К/мес &rarr; нужно 4x рост. 15 сделок/мес &times; 220К чек или 12 сделок &times; 280К чек.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Каналы привлечения (приоритет)</div>
+    <table class="data-table">
+      <thead>
+        <tr><th>Канал</th><th>Стоимость</th><th>Приоритет</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Систематизация сарафана</td><td>0</td><td><span class="channel-priority priority-high">ВЫСОКИЙ</span></td></tr>
+        <tr><td>Сайт + SEO</td><td>70К + обслуживание</td><td><span class="channel-priority priority-high">ВЫСОКИЙ</span></td></tr>
+        <tr><td>Telegram-канал</td><td>0-15К/мес</td><td><span class="channel-priority priority-high">ВЫСОКИЙ</span></td></tr>
+        <tr><td>Документ ценности (PDF)</td><td>0</td><td><span class="channel-priority priority-high">ВЫСОКИЙ</span></td></tr>
+        <tr><td>Видео-серия (1/нед)</td><td>2-3ч/нед</td><td><span class="channel-priority priority-mid">СРЕДНИЙ</span></td></tr>
+        <tr><td>Партнёрства с застройщиками</td><td>0</td><td><span class="channel-priority priority-mid">СРЕДНИЙ</span></td></tr>
+        <tr><td>VK реклама (видео)</td><td>?</td><td><span class="channel-priority priority-mid">СРЕДНИЙ</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:24px; margin-bottom:14px; font-size:16px;">Roadmap на 12 месяцев</h3>
+
+  <div class="roadmap-phase">
+    <div class="phase-label">Фаза 1 &mdash; Неделя 1-4</div>
+    <h4>Быстрые победы</h4>
+    <ul>
+      <li>Систематизировать реферальный цикл (скрипт благодарности 7-14 дней после сделки)</li>
+      <li>Документ ценности (PDF) &mdash; отправлять перед первой встречей</li>
+      <li>Запуск видео-серии: 13 готовых кейсов = 3 месяца контента</li>
+      <li>Фикс Telegram-канала: реперспективирование с &laquo;инвестор&raquo; на &laquo;со мной безопасно&raquo;</li>
+    </ul>
+    <div class="kpi-target">KPI: +2-3 реферала/мес, +10% конверсия первого контакта</div>
+  </div>
+
+  <div class="roadmap-phase">
+    <div class="phase-label">Фаза 2 &mdash; Месяц 1-3</div>
+    <h4>Фундамент</h4>
+    <ul>
+      <li>Запуск сайта (бренд-first: Ксения на первом экране, не каталог)</li>
+      <li>SEO: 2-3 статьи/мес по гео-запросам (нулевая конкуренция)</li>
+      <li>Telegram: 3 поста/нед + серии + CTA</li>
+      <li>Документирование процессов для стажёров (видеобиблиотека)</li>
+      <li>3-5 партнёрств с застройщиками</li>
+    </ul>
+    <div class="kpi-target">KPI: Сайт live, 8 сделок/мес, 160К средний чек</div>
+  </div>
+
+  <div class="roadmap-phase">
+    <div class="phase-label">Фаза 3 &mdash; Месяц 3-6</div>
+    <h4>Масштабирование</h4>
+    <ul>
+      <li>SEO даёт первые 5-10 лидов/мес</li>
+      <li>Контент-серии на YouTube (10-15 мин разборы кейсов)</li>
+      <li>Коллаборации с НН-блогерами</li>
+      <li>Масштабирование команды: 3-4 стажёра &rarr; 4-6 сделок/мес от них</li>
+      <li>Фокус на бизнес-класс: поднять чек с 146К до 200-280К</li>
+    </ul>
+    <div class="kpi-target">KPI: 10 сделок/мес, 180К чек, 1.2М прибыли/мес</div>
+  </div>
+
+  <div class="roadmap-phase">
+    <div class="phase-label">Фаза 4 &mdash; Месяц 6-12</div>
+    <h4>Доминирование</h4>
+    <ul>
+      <li>ТОП-10 локального поиска, 10-15 тёплых лидов/мес с сайта</li>
+      <li>5-10К Telegram, 10-20К VK</li>
+      <li>Статус &laquo;признанный эксперт по недвижимости НН&raquo;</li>
+      <li>Команда: Ксения = сложные сделки + управление</li>
+      <li>Диверсификация: сарафан 50% + сайт 25% + контент 15% + другое 10%</li>
+    </ul>
+    <div class="kpi-target">KPI: 15 сделок/мес, 220К чек, 2М прибыли/мес</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">3 мега-рычага (не активированы)</div>
+    <table class="data-table">
+      <tr>
+        <td><strong style="color:var(--accent);">1. Партнёрства с застройщиками</strong></td>
+        <td style="text-align:right;">+3-5 сделок/мес, 0 маркетинговых затрат</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent);">2. Рост среднего чека</strong></td>
+        <td style="text-align:right;">146К &rarr; 220-280К (бизнес-класс + % вверх)</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent);">3. Система реферального мультипликатора</strong></td>
+        <td style="text-align:right;">77% &rarr; 85%+ с системой</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- .content -->
+
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
